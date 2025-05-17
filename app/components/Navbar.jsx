@@ -40,6 +40,15 @@ const Navbar = () => {
           >
             Contact
           </Link>
+          <Link href="/blogs" className="hover:text-gray-400 transition-colors">
+            Blogs
+          </Link>
+          <Link
+            href="https://drive.google.com/file/d/1dhk8oUwx6tbokyy2WcvxNmr_k9xi_pWU/view?usp=sharing"
+            className="hover:text-gray-400 transition-colors"
+          >
+            Resume
+          </Link>
         </div>
 
         {/* Mobile menu button */}
@@ -115,6 +124,20 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
+            </Link>
+            <Link
+              href="/blogs"
+              className="hover:text-gray-400 transition-colors py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blogs
+            </Link>
+            <Link
+              href="https://drive.google.com/file/d/1dhk8oUwx6tbokyy2WcvxNmr_k9xi_pWU/view?usp=sharing"
+              className="hover:text-gray-400 transition-colors py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Resume
             </Link>
           </div>
         </div>
