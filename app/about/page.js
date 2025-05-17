@@ -1,13 +1,22 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
-
+import Image from "next/image";
 export default function About() {
   return (
     <main className="mt-20 min-h-screen px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-normal">About Me</h1>
         <div className="flex flex-col md:flex-row items-center md:items-start mt-8 gap-8">
-          <img src="/profile.jpg" alt="Profile" className="w-full md:w-60 h-auto md:h-80 mt-4" />
+          <Image
+            src="/profile.jpg"
+            alt="Profile"
+            width={240}
+            height={320}
+            className="w-full md:w-60 h-auto md:h-80 mt-4"
+            priority // loads the image immediately
+            quality={100} // ensures maximum image quality
+          />
+
           <div>
             <p className="text-gray-200 mt-4 text-justify">
               My journey started with curiosity and a terminal window, and
@@ -20,7 +29,7 @@ export default function About() {
               I have experience in various programming languages and frameworks,
               including JavaScript, React, Node.js, and Python. I enjoy working
               on both the front-end and back-end of web applications. I am
-              always looking for new challenges and opportunities to grow as a  
+              always looking for new challenges and opportunities to grow as a
               developer. I believe that continuous learning is essential in the
               tech industry, and I strive to stay up-to-date with the latest
               trends and best practices.
