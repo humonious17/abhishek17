@@ -3,16 +3,22 @@ import React, { useState, useEffect } from "react";
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // Check if it's a touch device
+    const touchDevice =
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0;
+
+    setIsTouchDevice(touchDevice);
+
+    if (touchDevice) return; // Don't set up mouse events on touch devices
+
     const updatePosition = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      // Delayed dot position for trailing effect
-      setTimeout(() => {
-        setDotPosition({ x: e.clientX, y: e.clientY });
-      }, 50);
     };
 
     const handleMouseEnter = () => setIsVisible(true);
@@ -29,17 +35,18 @@ const CustomCursor = () => {
     };
   }, []);
 
+  // Don't render anything on touch devices
+  if (isTouchDevice) return null;
+
   return (
-    <>
-      <div
-        className="custom-cursor"
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          opacity: isVisible ? 1 : 0,
-        }}
-      />
-    </>
+    <div
+      className="custom-cursor"
+      style={{
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        opacity: isVisible ? 1 : 0,
+      }}
+    />
   );
 };
 

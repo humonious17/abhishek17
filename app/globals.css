@@ -5,7 +5,7 @@
 
 :root {
   --background: #000000;
-  --foreground: #171717;
+  --foreground: #ffffff; /* Changed to white */
   --font-geist: "Geist", sans-serif;
   --cursor-color: #f0f0f0; /* Custom cursor color */
 }
@@ -20,54 +20,63 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ffffff; /* Changed to white */
     --cursor-color: #f0f0f0;
   }
 }
 
-/* Custom cursor styles */
-html,
-body {
-  cursor: none; /* Hide default cursor */
+/* Custom cursor styles - only for non-touch devices */
+@media (pointer: fine) {
+  html,
+  body {
+    cursor: none; /* Hide default cursor */
+  }
+
+  .custom-cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid var(--cursor-color);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, transform 0.2s;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
+
+  /* Cursor hover effect for interactive elements */
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    cursor: none !important;
+  }
+
+  /* Custom pointer style cursor for interactive elements */
+  a:hover ~ .custom-cursor,
+  button:hover ~ .custom-cursor,
+  [role="button"]:hover ~ .custom-cursor,
+  input:hover ~ .custom-cursor,
+  select:hover ~ .custom-cursor,
+  textarea:hover ~ .custom-cursor {
+    width: 12px;
+    height: 20px;
+    border-radius: 0;
+    background-color: var(--cursor-color);
+    border: none;
+    transform: translate(-4px, -6px) rotate(45deg);
+  }
 }
 
-.custom-cursor {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: white;
-  border: 2px solid var(--cursor-color);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, transform 0.2s;
-  z-index: 9999;
-  mix-blend-mode: difference;
-}
-
-/* Cursor hover effect for interactive elements */
-a,
-button,
-[role="button"],
-input,
-select,
-textarea {
-  cursor: none !important;
-}
-
-/* Custom pointer style cursor for interactive elements */
-a:hover ~ .custom-cursor,
-button:hover ~ .custom-cursor,
-[role="button"]:hover ~ .custom-cursor,
-input:hover ~ .custom-cursor,
-select:hover ~ .custom-cursor,
-textarea:hover ~ .custom-cursor {
-  width: 12px;
-  height: 20px;
-  border-radius: 0;
-  background-color: var(--cursor-color);
-  border: none;
-  transform: translate(-4px, -6px) rotate(45deg);
+/* For touch devices, ensure the custom cursor is hidden */
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
 }
 
 body {
